@@ -1,58 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+//import { useState } from 'react'
+//import reactLogo from './assets/react.svg'
+//import viteLogo from '/vite.svg'
+//import { basename } from 'path'
+
 import './App.css'
 import Layout from './components/Layout'
-
+const baseClasses =
+  "h-16 w-full flex items-center justify-center text-xl font-semibold rounded-lg cursor-pointer transition duration-150 ease-in-out";
 function App() {
-  const [count, setCount] = useState(0)
-
+//  const [count, setCount] = useState(0)
+const signList = [
+  '%','CE','C','<-',
+  '1/x','x2','','除',
+  '7','8','9','x',
+  '4','5','6','-',
+  '1','2','3','+',
+  '+-','0','.','='
+]
   return (
     <Layout>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+        <input type="text" className="bg-green p-4 mb-4 rounded-lg shadow-inner"/>
+        <div className='grid grid-cols-4 gap-2 bg-gray-100 p-4 round-x1 shadow-2x1 max-w-sm mx-auto'>
+          {
+            signList.map(
+              (sign, index) => {
 
-      <div className="grid grid-cols-4 gap-4">
-        {/* 這裡面的子元素會自動變成 3 欄排列 */}
-        <div>%</div>
-        <div>CE</div>
-        <div>C</div>
-        <div>⬅</div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div>÷</div>
-        <div>7</div>
-        <div>6</div>
-        <div>5</div>
-        <div>×</div>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>+</div>
-        <div>±</div>
-        <div>0</div>
-        <div>.</div>
-        <div>=</div>
-      </div>
+                return (
+                  <div key={index} className={baseClasses}>
+                    {sign}
+                  </div>
+                )
+              }
+            )
+          }
+
+        </div>
     </Layout>
   )
 }
