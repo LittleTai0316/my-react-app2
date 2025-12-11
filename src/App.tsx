@@ -20,7 +20,7 @@ const signList = [
   return (
     <Layout>
         <input type="text" className="bg-green p-4 mb-4 rounded-lg shadow-inner"/>
-        <div className='grid grid-cols-4 gap-2 bg-gray-100 p-4 round-x1 shadow-2x1 max-w-sm mx-auto'>
+        <div className='grid grid-cols-4 gap-2 bg-gray-300 p-4 round-x1 shadow-2x1 max-w-sm mx-auto'>
           {
             signList.map(
               (sign, index) => {
