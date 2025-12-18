@@ -3,32 +3,77 @@
 //import viteLogo from '/vite.svg'
 //import { basename } from 'path'
 
+import { useState } from 'react';
 import './App.css'
 import Layout from './components/Layout'
 const baseClasses =
   "h-16 w-full flex items-center justify-center text-xl font-semibold rounded-lg cursor-pointer transition duration-150 ease-in-out";
 function App() {
-//  const [count, setCount] = useState(0)
+  const [input1, setInput1] = useState("");
+  const [op, setOp] = useState("");
+  const [eq, setEq] = useState(false);
+  const [input2, setInput2] = useState("");
+  const [ans, setAns] = useState(0);
+  
 const signList = [
   '%','CE','C','<-',
-  '1/x','x2','','除',
+  '1/x', 'x²', '²√x', '÷',
   '7','8','9','x',
   '4','5','6','-',
   '1','2','3','+',
   '+-','0','.','='
-]
+];
+
+const isNum = (sign: string) => {
+  return !isNaN(parseFloat(sign))
+};
+
+const handleCalc = (sign: string)=>{
+  if (isNum(sign)) {
+    if (op) {
+      setInput2(input2 + sign);
+    } else {
+      setInput1(input1 + sign);
+    }
+      return;
+  }
+
+  if("+" === sign){
+    setOp(sign);
+    return;
+  }
+
+  if("=" === sign){
+    if("+" === op){
+      setAns(parseFloat(input1) + parseFloat(input2));
+      setEq(true);
+    }
+  }
+
+};
+
+const getDisplayInfo = ()=> {
+  if(eq){
+    return ans+"";
+  }
+  if(op){
+    return input2;
+  }
+  return input1;
+}
+
   return (
     <Layout>
-        <input type="text" className="bg-green p-4 mb-4 rounded-lg shadow-inner"/>
+        <input type="text" value={getDisplayInfo()} className="bg-green-100 p-4 mb-4 rounded-lg shadow-inner"/>
         <div className='grid grid-cols-4 gap-2 bg-gray-300 p-4 round-x1 shadow-2x1 max-w-sm mx-auto'>
           {
             signList.map(
               (sign, index) => {
 
                 return (
-                  <div key={index} className={baseClasses}>
+                  <button key={index} className={baseClasses} onClick={ ()=> { handleCalc(sign); } }>
                     {sign}
-                  </div>
+                  </button>
                 )
               }
             )
